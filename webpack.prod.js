@@ -4,7 +4,6 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const HWP = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const PUBLIC_PATH = '/';
  const GLOBALS = {
@@ -23,7 +22,6 @@ module.exports={
     contentBase: path.join(__dirname, 'dist', PUBLIC_PATH)
   },
   plugins: [
-    new CleanWebpackPlugin('dist', {}),
     new webpack.LoaderOptionsPlugin({
       debug: true
     }),

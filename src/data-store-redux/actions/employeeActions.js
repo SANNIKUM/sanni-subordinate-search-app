@@ -17,6 +17,13 @@ const getEmployees = (employees) => {
         employees 
         };
 };
+
+const ajaxCallSuccess = ()=>{
+    return { 
+        type: types.FETCH_SUCCESS,
+        data:true 
+        };
+}
 export function fetchEmployeeDetail(employeeName,level,callback ) {
     return function (dispatch) {
         dispatch(beginAjaxCall());        

@@ -5,7 +5,7 @@ export const getEnvironment = () => process.env.NODE_ENV
   export  const getApiUrl = () => {
     switch (getEnvironment()) {
       case 'production':
-        return 'https://<your-domain-name>';
+        return 'http://api.additivasia.io';
       case 'stage':
         return 'https://<your-domain-name>';
       case 'development':

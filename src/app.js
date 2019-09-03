@@ -14,7 +14,7 @@ function App(props) {
         <header className="App-header">
                 <h2>   Welcome To Employees Portal   </h2>              
         </header>
-        {props.loading ? <div className="loading" > </div> : null}
+        {props.loading ? <div className="loading" > <span>Please wait...</span>  </div> : null}
        <SearchSubordinates  {...props} />    
       </>
     );
