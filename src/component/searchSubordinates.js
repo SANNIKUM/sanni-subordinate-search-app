@@ -9,7 +9,6 @@ function SearchSubordinates(props){
     const [isTyping, changeTyping]  = useState(false);
     const [isSearched, setSearch] = useState(false);
     const [history, setHistory] = useState([]);
-    console.log("SearchSubordinates",props);
 
     function  handleChange(event){
         const employeeName = event.target.value;
@@ -46,28 +45,16 @@ function SearchSubordinates(props){
         localStorage.setItem('history',JSON.stringify(history));
     }
 
-    const RecursiveFecth =  (employees,level)=>{
-        SetHistoryData(employees[0]);
-        if(level==1){
-            let employeeName = employees[0];
-            changeName(employeeName);
-            props.actions.clearEmployee();
-            
-        }
-        employees.forEach(emp => {            
-            props.actions.fetchEmployeeDetail(emp,level,RecursiveFecth).then(()=>{
-                console.log('Success');
-             }).catch((err)=>{
-                 console.log("error",err);
-                 setSearch(true);
-             })
-        });
+    const FetchSubordinatesAPI =  (empName)=>{
+            SetHistoryData(empName);
+            changeName(empName);
+            props.actions.fetchEmployeeDetail(empName);
+        
        
     }
     function handleClick(){       
-        const employees = [employeeName]  
         setSearch(true);
-        RecursiveFecth(employees,1);
+        FetchSubordinatesAPI(employeeName,1);
     }
 
     function handleBlur(){
@@ -97,7 +84,7 @@ function SearchSubordinates(props){
                      </div>
                      <Subordinates 
                      {...props.data}
-                      RecursiveFecth ={RecursiveFecth} 
+                      FetchSubordinatesAPI ={FetchSubordinatesAPI} 
                       isSearched={isSearched} 
                       employeeName={employeeName} />
                  </div>

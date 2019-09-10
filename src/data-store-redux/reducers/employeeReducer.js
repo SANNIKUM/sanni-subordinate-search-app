@@ -4,19 +4,16 @@ import initialState from "../initialState";
 export default function employeeReducer(state=initialState, action){
     switch(action.type){
         case types.FETCH_EMPLOYEE_DETAIL:
+            
                 let newState = {...state};
-                if(newState.employee.name!=null){                   
-                    let isAlreadyExist=false;
-                    newState.employees.forEach((emp)=>{
-                        if(emp.name == action.data.name && emp.role == action.data.role ){
-                            isAlreadyExist =true;                            
-                        }
+                    let employees = []
+                    action.data.forEach(emp=>{
+                            emp.subordinates.forEach(e=>{
+                                employees.push({name:e, level:emp.level})
+                            })                      
                     })
-                    if(!isAlreadyExist){
-                        newState.employees.push({...action.data})
-                    }
-                }                
-               newState.employee = {...action.data}
+                    newState.employees = [...employees]
+               newState.employee = {...action.data[0]}
                return newState;
             case types.FETCH_EMPLOYEES:
                 if(action.employees.length)
