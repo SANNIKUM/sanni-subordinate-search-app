@@ -9,6 +9,9 @@ function SearchSubordinates(props){
     const [isTyping, changeTyping]  = useState(false);
     const [isSearched, setSearch] = useState(false);
     const [history, setHistory] = useState([]);
+    const [isSearchedDD, setDD] = useState(false);
+    const [myList, ChangeList] = useState({list:[{id:1,name:"A", isSelected:false},{id:2,name:"B",isSelected:false},{id:3,name:"C",isSelected:false}]});
+    const [selectedValue, setSelectedValue] = useState('');
 
     function  handleChange(event){
         const employeeName = event.target.value;
@@ -57,14 +60,47 @@ function SearchSubordinates(props){
         FetchSubordinatesAPI(employeeName,1);
     }
 
+    function showDD(){
+        const searchedDD = !isSearchedDD;
+        console.log("myList.list",myList.list)
+        setDD(searchedDD);
+    }
+
     function handleBlur(){
         const isTyping =false; 
         setTimeout(()=>changeTyping(isTyping),500);
     }
 
+    function addItem(item){
+        debugger
+        const mylist = myList;
+        let value = '';
+        mylist.list.forEach(i=>{
+            if(item.id == i.id)
+            i.isSelected = !item.isSelected;
+            if(i.isSelected){
+                value+=i.name;
+            }
+        })
+
+        setSelectedValue(value);
+       
+    }
+
     return (
         <>
             <div className="row content" >
+            <div className="row" style={{width:"100%", border:"none"}} >
+            <div className="col-sm-6 hft">
+                <input onChange={()=>{}} type="text" value={selectedValue} height="50px" ></input><span onClick={showDD} className="downarrow">V</span>
+                <ul className={isSearchedDD? "ms show":"ms hide" }>
+                {myList.list.map((item,index)=>  
+                     <li onClick={()=>addItem(item)} key={"ll"+index}> <input onChange={()=>{}} checked={item.isSelected} type="checkbox" key={"cb"+index} />{item.name}</li>
+                
+                )}
+                </ul>
+                </div>
+                </div>
                 <div className="row" style={{width:"100%", border:"none"}} >
                     <div className="col-sm-6 hft">
                       <input 

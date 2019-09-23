@@ -5,6 +5,32 @@
     color: #fff;
     text-align: center;
 }
+
+.ms{
+    list-style-type: none;
+}
+
+.downarrow{
+    position: relative;
+    left: -18px;
+    border-left: 1px solid;
+    padding-left: 3px;
+    cursor: pointer;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+ul>li{
+    margin: 0;
+    padding: 2px;
+    border: 1 px solid gray;
+}
 .loading>span{
     position: relative;
     top: 50%;
